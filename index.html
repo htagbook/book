@@ -39,11 +39,18 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
 
-    .logo-area {
-      display: flex;
-      align-items: center;
-    }
+  .logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* 로고와 글자 사이 간격 */
+}
 
+.logo-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #222222;
+  letter-spacing: -0.5px;
+}
     /* 깃허브에 업로드된 logo.png 불러오기 */
     .logo-img {
       height: 120px; /* 시원하고 큼직한 로고 크기 */
@@ -270,10 +277,11 @@
 
   <!-- 헤더 (logo.png) -->
   <header>
-    <div class="logo-area">
-      <img src="logo.png" alt="해쉬태그 트래블 가이드북 로고" class="logo-img">
-    </div>
-  </header>
+  <div class="logo-area">
+    <img src="logo.png" alt="해쉬태그 트래블 가이드북 로고" class="logo-img">
+    <span class="logo-title">해시태그 트래블 시리즈</span>
+  </div>
+</header>
 
   <!-- 히어로 섹션 -->
   <section class="hero">
