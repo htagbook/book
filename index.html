@@ -44,13 +44,14 @@
       align-items: center;
     }
 
+    /* 깃허브에 업로드된 logo.png 불러오기 */
     .logo-img {
-      height: 65px; /* 시원하고 눈에 띄는 크기 */
+      height: 65px; /* 시원하고 큼직한 로고 크기 */
       width: auto;
       object-fit: contain;
     }
 
-    /* 2. 히어로 섹션 */
+    /* 2. 히어로 섹션 (여행 가이드북 테마) */
     .hero {
       text-align: center;
       padding: 4rem 1rem 3rem;
@@ -189,7 +190,7 @@
       background-color: #c8235a;
     }
 
-    /* 4. 하단 영역 & logo-animated.mp4 적용 */
+    /* 4. 하단 영역 & 오른쪽에 logo-animated.mp4 배치 */
     .bottom-section {
       max-width: 1100px;
       margin: 5rem auto 3rem;
@@ -233,6 +234,7 @@
       align-items: center;
     }
 
+    /* 깃허브에 업로드된 logo-animated.mp4 불러오기 */
     .animated-logo-video {
       width: 100%;
       max-width: 240px;
@@ -280,7 +282,7 @@
     <p>해쉬태그 트래블 시리즈와 함께 당신만의 특별하고 현명한 여행을 계획해 보세요.</p>
   </section>
 
-  <!-- 도서 목록 섹션 -->
+  <!-- 가이드북 도서 목록 섹션 -->
   <section class="books-section">
     <div class="section-header">
       <h2 class="section-title">가이드북 시리즈 전체 보기</h2>
@@ -289,7 +291,7 @@
     <div class="book-grid" id="bookGrid"></div>
   </section>
 
-  <!-- 하단 섹션 (logo-animated.mp4) -->
+  <!-- 하단 섹션 (logo-animated.mp4 배치) -->
   <section class="bottom-section">
     <div class="bottom-container">
       <div class="bottom-text">
@@ -313,9 +315,9 @@
     <p>© 해쉬태그 트래블 가이드북 시리즈. All rights reserved.</p>
   </footer>
 
-  <!-- 가이드북 동적 추가/관리 스크립트 -->
+  <!-- 가이드북 동적 관리 스크립트 -->
   <script>
-    // 💡 나중에 도서를 추가할 때 이 배열에 항목을 늘려주시면 됩니다!
+    // 💡 알라딘 시리즈 도서를 계속 추가하실 수 있는 목록입니다.
     const books = [
       {
         title: "해쉬태그 가이드북 01",
