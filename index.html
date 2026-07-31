@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>해시태그 트래블 가이드북 시리즈</title>
+  <title>해쉬태그 트래블 가이드북 시리즈</title>
   <style>
     :root {
       --primary-color: #e1306c;
@@ -25,7 +25,7 @@
       line-height: 1.6;
     }
 
-    /* 1. 상단 헤더 & 확대된 로고 */
+    /* 1. 상단 헤더 & logo.png 적용 */
     header {
       background: #ffffff;
       border-bottom: 1px solid #eee;
@@ -44,14 +44,13 @@
       align-items: center;
     }
 
-    /* 로고 크기 확대 (기존 40px -> 65px) */
     .logo-img {
-      height: 65px; 
+      height: 65px; /* 시원하고 눈에 띄는 크기 */
       width: auto;
       object-fit: contain;
     }
 
-    /* 2. 여행 테마 히어로 섹션 */
+    /* 2. 히어로 섹션 */
     .hero {
       text-align: center;
       padding: 4rem 1rem 3rem;
@@ -111,7 +110,6 @@
       color: #777;
     }
 
-    /* 도서 그리드 레아아웃 */
     .book-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -146,7 +144,6 @@
       position: relative;
     }
 
-    /* 표지 이미지가 업로드되면 표시되는 스타일 */
     .book-cover img {
       width: 100%;
       height: 100%;
@@ -192,7 +189,7 @@
       background-color: #c8235a;
     }
 
-    /* 4. 웹사이트 하단 소개 & 오른쪽 움직이는 로고 배치 */
+    /* 4. 하단 영역 & logo-animated.mp4 적용 */
     .bottom-section {
       max-width: 1100px;
       margin: 5rem auto 3rem;
@@ -229,7 +226,6 @@
       word-break: keep-all;
     }
 
-    /* 오른쪽에 배치된 움직이는 로고 비디오 */
     .bottom-video-wrapper {
       flex: 0.7;
       display: flex;
@@ -254,7 +250,6 @@
       border-top: 1px solid #eee;
     }
 
-    /* 모바일 반응형 처리 */
     @media (max-width: 768px) {
       .logo-img { height: 50px; }
       .hero h1 { font-size: 1.8rem; }
@@ -271,14 +266,14 @@
 </head>
 <body>
 
-  <!-- 헤더 (확대된 메인 로고) -->
+  <!-- 헤더 (logo.png) -->
   <header>
     <div class="logo-area">
-      <img src="logo.png" alt="해시태그 트래블 가이드북 로고" class="logo-img">
+      <img src="logo.png" alt="해쉬태그 트래블 가이드북 로고" class="logo-img">
     </div>
   </header>
 
-  <!-- 히어로 섹션 (여행 가이드북 맞춤 문구) -->
+  <!-- 히어로 섹션 -->
   <section class="hero">
     <span class="hero-badge">✈️ HASHTAG TRAVEL GUIDEBOOK</span>
     <h1>자유 여행자를 위한 가장 똑똑한 가이드북</h1>
@@ -291,16 +286,12 @@
       <h2 class="section-title">가이드북 시리즈 전체 보기</h2>
       <span class="book-count" id="bookCount"></span>
     </div>
-    
-    <!-- 자바스크립트에 의해 책 카드가 자동으로 생성되어 들어갈 위치 -->
     <div class="book-grid" id="bookGrid"></div>
   </section>
 
-  <!-- 맨 아래 하단 소개 섹션 (오른쪽 움직이는 MP4 로고 배치) -->
+  <!-- 하단 섹션 (logo-animated.mp4) -->
   <section class="bottom-section">
     <div class="bottom-container">
-      
-      <!-- 왼쪽: 안내 문구 -->
       <div class="bottom-text">
         <h2>여행의 시작부터 끝까지, 해쉬태그와 함께</h2>
         <p>
@@ -309,13 +300,12 @@
         </p>
       </div>
 
-      <!-- 오른쪽: 움직이는 MP4 로고 -->
+      <!-- 오른쪽 움직이는 MP4 로고 -->
       <div class="bottom-video-wrapper">
         <video class="animated-logo-video" autoplay loop muted playsinline>
           <source src="logo-animated.mp4" type="video/mp4">
         </video>
       </div>
-
     </div>
   </section>
 
@@ -323,14 +313,14 @@
     <p>© 해쉬태그 트래블 가이드북 시리즈. All rights reserved.</p>
   </footer>
 
-  <!-- 책 목록을 쉽게 추가/관리하는 자바스크립트 코드 -->
+  <!-- 가이드북 동적 추가/관리 스크립트 -->
   <script>
-    // 💡 나중에 가이드북을 추가할 때 아래 배열 형식으로 항목만 계속 늘려주시면 됩니다!
+    // 💡 나중에 도서를 추가할 때 이 배열에 항목을 늘려주시면 됩니다!
     const books = [
       {
         title: "해쉬태그 가이드북 01",
         desc: "여행지 핵심 정보 & 추천 코스 모음",
-        coverImg: "", // 이미지 파일이 있다면 "cover1.jpg" 같이 넣어주세요
+        coverImg: "",
         link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804"
       },
       {
@@ -351,10 +341,8 @@
         coverImg: "",
         link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804"
       }
-      // 필요할 때 여기 밑으로 복사해서 계속 추가하시면 됩니다.
     ];
 
-    // 도서 카드를 화면에 그려주는 기능
     function renderBooks() {
       const grid = document.getElementById('bookGrid');
       const countLabel = document.getElementById('bookCount');
