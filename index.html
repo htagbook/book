@@ -1,368 +1,389 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>해시태그 가이드북 시리즈</title>
-    <style>
-        /* --- 기본 스타일 리셋 --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>해시태그 트래블 가이드북 시리즈</title>
+  <style>
+    :root {
+      --primary-color: #e1306c;
+      --bg-color: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f8fafc;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden; /* 가로 스크롤 방지 */
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
 
-        /* --- 네비게이션 헤더 --- */
-        header {
-            background-color: #ffffff;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    /* 1. 상단 헤더 & 확대된 로고 */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #eee;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    .logo-area {
+      display: flex;
+      align-items: center;
+    }
 
-        /* 🚀 상단 좌측 로고 키우기 */
-        .logo-icon {
-            font-size: 32px; /* 기존보다 크게 설정 */
-            font-weight: 900;
-            color: #2563eb;
-        }
+    /* 로고 크기 확대 (기존 40px -> 65px) */
+    .logo-img {
+      height: 65px; 
+      width: auto;
+      object-fit: contain;
+    }
 
-        .logo-text {
-            font-size: 24px; /* 기존보다 크게 설정 */
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #111;
-        }
+    /* 2. 여행 테마 히어로 섹션 */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+      background: linear-gradient(135deg, #fff0f5 0%, #e6f0ff 100%);
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
+    .hero-badge {
+      display: inline-block;
+      background: #ffffff;
+      color: var(--primary-color);
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
 
-        nav a {
-            font-weight: 600;
-            font-size: 16px;
-            color: #4b5563;
-            transition: color 0.2s;
-        }
+    .hero h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.8rem;
+      color: #111;
+      word-break: keep-all;
+    }
 
-        nav a:hover {
-            color: #2563eb;
-        }
+    .hero p {
+      color: #555;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      word-break: keep-all;
+    }
 
-        /* --- 메인 컨텐츠 영역 --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
+    /* 3. 가이드북 시리즈 목록 섹션 */
+    .books-section {
+      max-width: 1100px;
+      margin: 3.5rem auto;
+      padding: 0 1.5rem;
+    }
 
-        /* 메인 히어로 제목 섹션 */
-        .hero {
-            text-align: center;
-            margin-bottom: 80px;
-        }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.8rem;
+      border-left: 4px solid var(--primary-color);
+      padding-left: 12px;
+    }
 
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 15px;
-        }
+    .section-title {
+      font-size: 1.5rem;
+      color: #111;
+    }
 
-        .hero p {
-            font-size: 20px;
-            color: #475569;
-        }
+    .book-count {
+      font-size: 0.9rem;
+      color: #777;
+    }
 
-        /* 소개 카드 섹션 */
-        .about-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 50px;
-            margin-bottom: 70px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 40px;
-        }
+    /* 도서 그리드 레아아웃 */
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.8rem;
+    }
 
-        .about-text {
-            flex: 1;
-        }
+    .book-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #f0f0f0;
+    }
 
-        .about-text h2 {
-            font-size: 30px;
-            color: #0f172a;
-            margin-bottom: 20px;
-        }
+    .book-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
 
-        .about-text p {
-            color: #64748b;
-            font-size: 16px;
-            margin-bottom: 15px;
-            word-break: keep-all;
-        }
+    .book-cover {
+      width: 100%;
+      height: 250px;
+      background-color: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.9rem;
+      position: relative;
+    }
 
-        /* 해시태그 구름 */
-        .tags-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            max-width: 350px;
-        }
+    /* 표지 이미지가 업로드되면 표시되는 스타일 */
+    .book-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .tag {
-            background-color: #eff6ff;
-            color: #2563eb;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            border: 1px solid #dbeafe;
-        }
+    .book-info {
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
 
-        /* 도서 그리드 섹션 */
-        .section-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: #0f172a;
-        }
+    .book-title {
+      font-size: 1.05rem;
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+      color: #222;
+      line-height: 1.4;
+    }
 
-        .book-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px;
-        }
+    .book-desc {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 1.2rem;
+    }
 
-        .book-card {
-            background-color: #ffffff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
+    .btn-link {
+      margin-top: auto;
+      display: inline-block;
+      text-align: center;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      padding: 0.65rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
 
-        .book-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-        }
+    .btn-link:hover {
+      background-color: #c8235a;
+    }
 
-        .book-cover {
-            height: 220px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 24px;
-        }
+    /* 4. 웹사이트 하단 소개 & 오른쪽 움직이는 로고 배치 */
+    .bottom-section {
+      max-width: 1100px;
+      margin: 5rem auto 3rem;
+      padding: 0 1.5rem;
+    }
 
-        .book-cover.bg-youtube {
-            background: linear-gradient(135deg, #ef4444, #b91c1c);
-        }
+    .bottom-container {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      border: 1px solid #f0f0f0;
+    }
 
-        .book-cover.bg-travel {
-            background: linear-gradient(135deg, #10b981, #047857);
-        }
+    .bottom-text {
+      flex: 1.3;
+    }
 
-        .book-info {
-            padding: 25px;
-        }
+    .bottom-text h2 {
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+      color: #111;
+      word-break: keep-all;
+    }
 
-        .book-info h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #0f172a;
-        }
+    .bottom-text p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
 
-        .book-info p {
-            color: #64748b;
-            font-size: 15px;
-            margin-bottom: 20px;
-            height: 4.5em; /* 글자 세 줄 높이 고정 */
-            overflow: hidden;
-        }
+    /* 오른쪽에 배치된 움직이는 로고 비디오 */
+    .bottom-video-wrapper {
+      flex: 0.7;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
 
-        .btn-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #2563eb;
-            color: #fff;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
+    .animated-logo-video {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
 
-        .btn-link:hover {
-            background-color: #1d4ed8;
-        }
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      color: #888;
+      font-size: 0.85rem;
+      background: #fafafa;
+      border-top: 1px solid #eee;
+    }
 
-        /* --- 푸터 영역 --- */
-        footer {
-            background-color: #0f172a;
-            color: #94a3b8;
-            padding: 50px 20px;
-            text-align: center;
-            font-size: 15px;
-            margin-top: 60px;
-        }
-
-        /* --- 🚀 맨 아래 오른쪽 움직이는 로고 --- */
-        .moving-logo-corner {
-            position: fixed; /* 화면 고정 */
-            bottom: 30px;
-            right: 30px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-            z-index: 1000;
-            cursor: pointer;
-            
-            /* 통통 튀는 모션 효과 적용 */
-            animation: bounce 3s infinite ease-in-out;
-        }
-
-        .moving-logo-corner .logo-icon {
-            font-size: 32px;
-            color: #2563eb;
-        }
-
-        /* 통통 튀는 애니메이션 정의 */
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0) scale(1);
-            }
-            50% {
-                transform: translateY(-15px) scale(1.05); /* 위로 이동 및 살짝 커짐 */
-            }
-        }
-    </style>
+    /* 모바일 반응형 처리 */
+    @media (max-width: 768px) {
+      .logo-img { height: 50px; }
+      .hero h1 { font-size: 1.8rem; }
+      .bottom-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+      }
+      .bottom-video-wrapper {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- 상단 네비게이션 헤더 -->
-    <header>
-        <div class="logo-container">
-            <span class="logo-icon">#</span>
-            <span class="logo-text">Htagbook</span>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#about">소개</a></li>
-                <li><a href="#series">시리즈</a></li>
-                <li><a href="#contact">문의하기</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- 메인 컨텐츠 container -->
-    <div class="container">
-        
-        <!-- 메인 히어로 제목 -->
-        <section class="hero">
-            <h1>해시태그 가이드북 시리즈</h1>
-            <p>한 권으로 끝내는 최신 트렌드 & 실전 마케팅 가이드</p>
-        </section>
-
-        <!-- 가이드북 소개 카드 -->
-        <section id="about" class="about-card">
-            <div class="about-text">
-                <h2>소셜 미디어와 여행의 필수 지침서</h2>
-                <p>해시태그 가이드북 시리즈는 복잡한 알고리즘 속에서 당신의 콘텐츠와 브랜드가 가장 돋보일 수 있는 확실한 전략과 노하우를 전달합니다.</p>
-                <p>분야별 맞춤 해시태그와 실전 전략을 통해 더 넓은 세상과 연결되어 보세요!</p>
-            </div>
-            <div class="tags-cloud">
-                <span class="tag">#TravelTips</span>
-                <span class="tag">#InstagramBoost</span>
-                <span class="tag">#GrowthHacking</span>
-                <span class="tag">#YouTubeGrowth</span>
-                <span class="tag">#ContentStrategy</span>
-            </div>
-        </section>
-
-        <!-- 시리즈 목록 도서 그리드 -->
-        <section id="series">
-            <h2 class="section-title">가이드북 시리즈 목록</h2>
-            <div class="book-grid">
-                
-                <!-- 도서 카드 1 -->
-                <div class="book-card">
-                    <div class="book-cover">Book 01</div>
-                    <div class="book-info">
-                        <h3>Instagram Boost</h3>
-                        <p>인스타그램 알고리즘 파악 및 도달률 최적화 핵심 전략 가이드</p>
-                        <a href="#" class="btn-link">알라딘에서 보기</a>
-                    </div>
-                </div>
-
-                <!-- 도서 카드 2 -->
-                <div class="book-card">
-                    <div class="book-cover bg-youtube">Book 02</div>
-                    <div class="book-info">
-                        <h3>YouTube Growth</h3>
-                        <p>구독자와 조회수를 빠르게 늘리는 영상 마케팅 분석서</p>
-                        <a href="#" class="btn-link">알라딘에서 보기</a>
-                    </div>
-                </div>
-
-                <!-- 도서 카드 3 -->
-                <div class="book-card">
-                    <div class="book-cover bg-travel">Book 03</div>
-                    <div class="book-info">
-                        <h3>Travel Content</h3>
-                        <p>여행 콘텐츠 제작자를 위한 로컬 해시태그 및 사진 촬영 팁</p>
-                        <a href="#" class="btn-link">알라딘에서 보기</a>
-                    </div>
-                </div>
-
-            </div>
-        </section>
+  <!-- 헤더 (확대된 메인 로고) -->
+  <header>
+    <div class="logo-area">
+      <img src="logo.png" alt="해시태그 트래블 가이드북 로고" class="logo-img">
     </div>
+  </header>
 
-    <!-- 푸터 영역 -->
-    <footer id="contact">
-        <p>&copy; 해시태그 가이드북. All rights reserved.</p>
-    </footer>
+  <!-- 히어로 섹션 (여행 가이드북 맞춤 문구) -->
+  <section class="hero">
+    <span class="hero-badge">✈️ HASHTAG TRAVEL GUIDEBOOK</span>
+    <h1>자유 여행자를 위한 가장 똑똑한 가이드북</h1>
+    <p>해쉬태그 트래블 시리즈와 함께 당신만의 특별하고 현명한 여행을 계획해 보세요.</p>
+  </section>
 
-    <!-- 🚀 맨 아래 오른쪽 움직이는 로고 버튼 -->
-    <div class="moving-logo-corner" title="Htagbook">
-        <span class="logo-icon">#</span>
+  <!-- 도서 목록 섹션 -->
+  <section class="books-section">
+    <div class="section-header">
+      <h2 class="section-title">가이드북 시리즈 전체 보기</h2>
+      <span class="book-count" id="bookCount"></span>
     </div>
+    
+    <!-- 자바스크립트에 의해 책 카드가 자동으로 생성되어 들어갈 위치 -->
+    <div class="book-grid" id="bookGrid"></div>
+  </section>
+
+  <!-- 맨 아래 하단 소개 섹션 (오른쪽 움직이는 MP4 로고 배치) -->
+  <section class="bottom-section">
+    <div class="bottom-container">
+      
+      <!-- 왼쪽: 안내 문구 -->
+      <div class="bottom-text">
+        <h2>여행의 시작부터 끝까지, 해쉬태그와 함께</h2>
+        <p>
+          주요 명소부터 숨겨진 로컬 스팟, 최신 여행 팁까지! <br>
+          해쉬태그 트래블 가이드북 시리즈는 복잡한 정보 대신 여행자에게 꼭 필요한 핵심 내용만 알차게 담아냅니다.
+        </p>
+      </div>
+
+      <!-- 오른쪽: 움직이는 MP4 로고 -->
+      <div class="bottom-video-wrapper">
+        <video class="animated-logo-video" autoplay loop muted playsinline>
+          <source src="logo-animated.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 해쉬태그 트래블 가이드북 시리즈. All rights reserved.</p>
+  </footer>
+
+  <!-- 책 목록을 쉽게 추가/관리하는 자바스크립트 코드 -->
+  <script>
+    // 💡 나중에 가이드북을 추가할 때 아래 배열 형식으로 항목만 계속 늘려주시면 됩니다!
+    const books = [
+      {
+        title: "해쉬태그 가이드북 01",
+        desc: "여행지 핵심 정보 & 추천 코스 모음",
+        coverImg: "", // 이미지 파일이 있다면 "cover1.jpg" 같이 넣어주세요
+        link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804"
+      },
+      {
+        title: "해쉬태그 가이드북 02",
+        desc: "자유 여행자를 위한 실전 가이드",
+        coverImg: "",
+        link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804"
+      },
+      {
+        title: "해쉬태그 가이드북 03",
+        desc: "숨은 로컬 스팟 & 맛집 완벽 정리",
+        coverImg: "",
+        link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804"
+      },
+      {
+        title: "해쉬태그 가이드북 04",
+        desc: "한 권으로 떠나는 완벽 여행 코스",
+        coverImg: "",
+        link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804"
+      }
+      // 필요할 때 여기 밑으로 복사해서 계속 추가하시면 됩니다.
+    ];
+
+    // 도서 카드를 화면에 그려주는 기능
+    function renderBooks() {
+      const grid = document.getElementById('bookGrid');
+      const countLabel = document.getElementById('bookCount');
+      
+      countLabel.textContent = `총 ${books.length}권`;
+      grid.innerHTML = '';
+
+      books.forEach((book) => {
+        const card = document.createElement('div');
+        card.className = 'book-card';
+
+        const coverHtml = book.coverImg 
+          ? `<img src="${book.coverImg}" alt="${book.title}">`
+          : `표지 준비중`;
+
+        card.innerHTML = `
+          <div class="book-cover">${coverHtml}</div>
+          <div class="book-info">
+            <div class="book-title">${book.title}</div>
+            <div class="book-desc">${book.desc}</div>
+            <a href="${book.link}" target="_blank" class="btn-link">알라딘에서 보기</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderBooks);
+  </script>
 
 </body>
 </html>
