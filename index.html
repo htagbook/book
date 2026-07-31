@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>해시태그 가이드북 시리즈</title>
+  <style>
+    /* 기본 CSS 스타일 설정 */
+    :root {
+      --primary-color: #e1306c;
+      --bg-color: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* 1. 상단 헤더 & 정적 로고 */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #eee;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* 2. 히어로 섹션 */
+    .hero {
+      text-align: center;
+      padding: 3.5rem 1rem;
+      background: linear-gradient(135deg, #fff0f5 0%, #e6f0ff 100%);
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    /* 3. 웹사이트 중간 섹션 (움직이는 로고 배치) */
+    .intro-section {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .intro-container {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .intro-text {
+      flex: 1.2;
+    }
+
+    .intro-text h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: #111;
+    }
+
+    .intro-text p {
+      color: #555;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      word-break: keep-all;
+    }
+
+    /* 움직이는 로고 비디오 스타일 */
+    .intro-video-wrapper {
+      flex: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .animated-logo-video {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* 4. 가이드북 시리즈 섹션 */
+    .books-section {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--primary-color);
+      padding-left: 12px;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .book-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .book-cover {
+      width: 100%;
+      height: 240px;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .book-info {
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .book-title {
+      font-size: 1.05rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .book-author {
+      font-size: 0.85rem;
+      color: #777;
+      margin-bottom: 1.2rem;
+    }
+
+    .btn-link {
+      margin-top: auto;
+      display: inline-block;
+      text-align: center;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      padding: 0.6rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+
+    .btn-link:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #888;
+      font-size: 0.85rem;
+      border-top: 1px solid #eee;
+      margin-top: 4rem;
+    }
+
+    /* 모바일 반응형 디자인 */
+    @media (max-width: 768px) {
+      .intro-container {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 1.5rem;
+      }
+      .animated-logo-video {
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 (정적 로고 적용) -->
+  <header>
+    <div class="logo-area">
+      <img src="logo.png" alt="해시태그 가이드북 로고" class="logo-img">
+    </div>
+  </header>
+
+  <!-- 히어로 섹션 -->
+  <section class="hero">
+    <h1>해시태그 가이드북 시리즈</h1>
+    <p>한 권으로 끝내는 최신 트렌드 & 실전 가이드</p>
+  </section>
+
+  <!-- 중간 단계 섹션 (소개 글 + 움직이는 MP4 로고 배치) -->
+  <section class="intro-section">
+    <div class="intro-container">
+      
+      <!-- 왼쪽: 설명 문구 -->
+      <div class="intro-text">
+        <h2>소셜 미디어와 여행의 필수 지침서</h2>
+        <p>
+          해시태그 가이드북 시리즈는 복잡한 알고리즘 속에서 당신의 콘텐츠와 브랜드가 
+          가장 돋보일 수 있는 확실한 전략과 노하우를 전달합니다.
+        </p>
+        <p>
+          다양한 분야별 맞춤 해시태그와 가이드를 통해 더 넓은 세상과 연결되어 보세요!
+        </p>
+      </div>
+
+      <!-- 오른쪽: 움직이는 MP4 로고 (무한 자동재생) -->
+      <div class="intro-video-wrapper">
+        <video class="animated-logo-video" autoplay loop muted playsinline>
+          <source src="logo-animated.mp4" type="video/mp4">
+          브라우저가 비디오 태그를 지원하지 않습니다.
+        </video>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 가이드북 도서 리스트 섹션 -->
+  <section class="books-section">
+    <h2 class="section-title">가이드북 시리즈 목록</h2>
+    <div class="book-grid">
+
+      <!-- 도서 카드 1 -->
+      <div class="book-card">
+        <div class="book-cover">표지 이미지 준비중</div>
+        <div class="book-info">
+          <div class="book-title">해시태그 가이드북 01</div>
+          <div class="book-author">저자 / 출판사</div>
+          <a href="https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804" target="_blank" class="btn-link">알라딘에서 보기</a>
+        </div>
+      </div>
+
+      <!-- 도서 카드 2 -->
+      <div class="book-card">
+        <div class="book-cover">표지 이미지 준비중</div>
+        <div class="book-info">
+          <div class="book-title">해시태그 가이드북 02</div>
+          <div class="book-author">저자 / 출판사</div>
+          <a href="https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804" target="_blank" class="btn-link">알라딘에서 보기</a>
+        </div>
+      </div>
+
+      <!-- 도서 카드 3 -->
+      <div class="book-card">
+        <div class="book-cover">표지 이미지 준비중</div>
+        <div class="book-info">
+          <div class="book-title">해시태그 가이드북 03</div>
+          <div class="book-author">저자 / 출판사</div>
+          <a href="https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804" target="_blank" class="btn-link">알라딘에서 보기</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 해시태그 가이드북. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
