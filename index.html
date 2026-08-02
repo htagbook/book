@@ -139,109 +139,116 @@
         </div>
       </div>
 
-      <!-- 2단계: 도서 등록 폼 -->
-      <div id="addBookStep" style="display: none;">
-        <h3>📚 새 도서 추가하기</h3>
-        <div class="form-group">
-          <label for="bookTitle">책 제목</label>
-          <input type="text" id="bookTitle" placeholder="예: 스페인">
-        </div>
-        <div class="form-group">
-          <label for="bookDesc">설명</label>
-          <input type="text" id="bookDesc" placeholder="예: 열정과 로맨스의 나라 스페인">
-        </div>
-        <div class="form-group">
-          <label for="coverImgName">이미지 파일명</label>
-          <input type="text" id="coverImgName" placeholder="예: spain.jpg (GitHub에 업로드된 파일명)">
-        </div>
-        <div class="form-group">
-          <label for="aladinLink">알라딘 구매 링크</label>
-          <input type="text" id="aladinLink" placeholder="https://www.aladin.co.kr/...">
-        </div>
-        <div class="modal-btns">
-          <button class="btn-cancel" onclick="closeAdminModal()">취소</button>
-          <button class="btn-submit" onclick="saveNewBook()">저장하기</button>
-        </div>
-      </div>
+<!-- 2단계: 도서 관리 (등록 및 삭제) -->
+<div id="addBookStep" style="display: none;">
+  <h3>📚 도서 관리</h3>
+  
+  <!-- 새 도서 추가 폼 -->
+  <div style="border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem;">
+    <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #333;">새 도서 추가</h4>
+    <div class="form-group">
+      <label for="bookTitle">책 제목</label>
+      <input type="text" id="bookTitle" placeholder="예: 스페인">
+    </div>
+    <div class="form-group">
+      <label for="bookDesc">설명</label>
+      <input type="text" id="bookDesc" placeholder="예: 열정과 로맨스의 나라 스페인">
+    </div>
+    <div class="form-group">
+      <label for="coverImgName">이미지 파일 경로</label>
+      <input type="text" id="coverImgName" placeholder="예: images/spain.jpg">
+    </div>
+    <div class="form-group">
+      <label for="aladinLink">알라딘 구매 링크</label>
+      <input type="text" id="aladinLink" placeholder="https://www.aladin.co.kr/...">
+    </div>
+    <button class="btn-submit" style="width: 100%; margin-top: 0.5rem;" onclick="saveNewBook()">저장하기</button>
+  </div>
+
+  <!-- 등록된 도서 삭제 목록 -->
+  <div>
+    <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #333;">등록된 도서 삭제</h4>
+    <div id="adminBookList" style="max-height: 150px; overflow-y: auto; border: 1px solid #ddd; border-radius: 6px; padding: 0.5rem;">
+      <!-- JavaScript에서 목록 생성 -->
     </div>
   </div>
 
+  <div class="modal-btns">
+    <button class="btn-cancel" onclick="closeAdminModal()">닫기</button>
+  </div>
+</div>     
+
   <script>
-    // 💡 기본 도서 데이터 (초기 목록 빈값 설정)
-const defaultBooks = [];
+ // 관리자 도서 목록 출력 (삭제용)
+function renderAdminBookList() {
+  const adminListContainer = document.getElementById('adminBookList');
+  if (!adminListContainer) return;
 
-    // 저장된 데이터 불러오기 (없으면 기본값)
-    let books = JSON.parse(localStorage.getItem('htag_books')) || defaultBooks;
+  if (books.length === 0) {
+    adminListContainer.innerHTML = '<p style="font-size:0.85rem; color:#888; text-align:center;">등록된 도서가 없습니다.</p>';
+    return;
+  }
 
-    // 화면에 목록 출력
-    function renderBooks() {
-      const container = document.getElementById('bookGrid');
-      document.getElementById('bookCount').textContent = `총 ${books.length}권`;
-      container.innerHTML = '';
-      
-      books.forEach(book => {
-        const card = document.createElement('div');
-        card.className = 'book-card';
-        const coverHtml = book.coverImg ? `<img src="${book.coverImg}" alt="${book.title} 표지">` : `<span>${book.title}<br>표지 준비중</span>`;
-        card.innerHTML = `
-          <a href="${book.link || '#'}" target="_blank" rel="noopener noreferrer" class="book-cover">
-            ${coverHtml}
-          </a>
-          <div class="book-info">
-            <h3 class="book-title">${book.title}</h3>
-            <p class="book-desc">${book.desc}</p>
-            <a href="${book.link || '#'}" target="_blank" rel="noopener noreferrer" class="btn-link">알라딘에서 보기</a>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
+  adminListContainer.innerHTML = '';
+  books.forEach((book, index) => {
+    const item = document.createElement('div');
+    item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px dashed #eee; font-size: 0.85rem;';
+    item.innerHTML = `
+      <span style="font-weight:600;">${book.title}</span>
+      <button onclick="deleteBook(${index})" style="background:#ff4d4f; color:#fff; border:none; padding:2px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">삭제</button>
+    `;
+    adminListContainer.appendChild(item);
+  });
+}
 
-    // --- 관리자 모달 제어 ---
-    const ADMIN_PW = "123789"; // 📌 비밀번호 설정 (원하시는 비밀번호로 변경하세요)
+// 비밀번호 확인 시 관리 목록도 함께 렌더링
+function checkPassword() {
+  const inputPw = document.getElementById('adminPw').value;
+  if (inputPw === ADMIN_PW) {
+    document.getElementById('authStep').style.display = 'none';
+    document.getElementById('addBookStep').style.display = 'block';
+    renderAdminBookList(); // 삭제용 목록 출력
+  } else {
+    alert("비밀번호가 올바르지 않습니다.");
+  }
+}
 
-    function openAdminAuth() {
-      document.getElementById('adminModal').style.display = 'flex';
-      document.getElementById('authStep').style.display = 'block';
-      document.getElementById('addBookStep').style.display = 'none';
-      document.getElementById('adminPw').value = '';
-    }
+// 도서 삭제 처리
+function deleteBook(index) {
+  if (confirm(`'${books[index].title}' 도서를 삭제하시겠습니까?`)) {
+    books.splice(index, 1); // 배열에서 삭제
+    localStorage.setItem('htag_books', JSON.stringify(books)); // LocalStorage 반영
+    renderBooks(); // 메인 화면 재렌더링
+    renderAdminBookList(); // 관리자 목록 재렌더링
+  }
+}
 
-    function closeAdminModal() {
-      document.getElementById('adminModal').style.display = 'none';
-    }
+// 도서 저장 시 폼 초기화 및 목록 업데이트
+function saveNewBook() {
+  const title = document.getElementById('bookTitle').value.trim();
+  const desc = document.getElementById('bookDesc').value.trim();
+  const coverImg = document.getElementById('coverImgName').value.trim();
+  const link = document.getElementById('aladinLink').value.trim();
 
-    function checkPassword() {
-      const inputPw = document.getElementById('adminPw').value;
-      if (inputPw === ADMIN_PW) {
-        document.getElementById('authStep').style.display = 'none';
-        document.getElementById('addBookStep').style.display = 'block';
-      } else {
-        alert("비밀번호가 올바르지 않습니다.");
-      }
-    }
+  if (!title) {
+    alert("책 제목을 입력해 주세요.");
+    return;
+  }
 
-    function saveNewBook() {
-      const title = document.getElementById('bookTitle').value.trim();
-      const desc = document.getElementById('bookDesc').value.trim();
-      const coverImg = document.getElementById('coverImgName').value.trim();
-      const link = document.getElementById('aladinLink').value.trim();
+  const newBook = { title, desc, coverImg, link };
+  books.push(newBook);
+  localStorage.setItem('htag_books', JSON.stringify(books));
+  
+  // 입력 폼 비우기
+  document.getElementById('bookTitle').value = '';
+  document.getElementById('bookDesc').value = '';
+  document.getElementById('coverImgName').value = '';
+  document.getElementById('aladinLink').value = '';
 
-      if (!title) {
-        alert("책 제목을 입력해 주세요.");
-        return;
-      }
-
-      const newBook = { title, desc, coverImg, link };
-      books.push(newBook);
-      
-      // LocalStorage 저장
-      localStorage.setItem('htag_books', JSON.stringify(books));
-      
-      renderBooks();
-      closeAdminModal();
-      alert("새 도서가 등록되었습니다!");
-    }
+  renderBooks();
+  renderAdminBookList();
+  alert("새 도서가 등록되었습니다!");
+}
 
     document.addEventListener('DOMContentLoaded', renderBooks);
   </script>
