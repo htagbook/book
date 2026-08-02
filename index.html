@@ -179,78 +179,121 @@
 </div>     
 
   <script>
- // 관리자 도서 목록 출력 (삭제용)
-function renderAdminBookList() {
-  const adminListContainer = document.getElementById('adminBookList');
-  if (!adminListContainer) return;
+// 📌 1. 비밀번호 및 기본 변수 설정
+  const ADMIN_PW = "1234"; // 👈 사용할 비밀번호 입력
+  let books = JSON.parse(localStorage.getItem('htag_books')) || [];
 
-  if (books.length === 0) {
-    adminListContainer.innerHTML = '<p style="font-size:0.85rem; color:#888; text-align:center;">등록된 도서가 없습니다.</p>';
-    return;
+  // 📌 2. 관리자 모달 창 열기/닫기 함수
+  function openAdminAuth() {
+    document.getElementById('adminModal').style.display = 'flex';
+    document.getElementById('authStep').style.display = 'block';
+    document.getElementById('addBookStep').style.display = 'none';
+    document.getElementById('adminPw').value = '';
   }
 
-  adminListContainer.innerHTML = '';
-  books.forEach((book, index) => {
-    const item = document.createElement('div');
-    item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px dashed #eee; font-size: 0.85rem;';
-    item.innerHTML = `
-      <span style="font-weight:600;">${book.title}</span>
-      <button onclick="deleteBook(${index})" style="background:#ff4d4f; color:#fff; border:none; padding:2px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">삭제</button>
-    `;
-    adminListContainer.appendChild(item);
-  });
-}
-
-// 비밀번호 확인 시 관리 목록도 함께 렌더링
-function checkPassword() {
-  const inputPw = document.getElementById('adminPw').value;
-  if (inputPw === ADMIN_PW) {
-    document.getElementById('authStep').style.display = 'none';
-    document.getElementById('addBookStep').style.display = 'block';
-    renderAdminBookList(); // 삭제용 목록 출력
-  } else {
-    alert("비밀번호가 올바르지 않습니다.");
-  }
-}
-
-// 도서 삭제 처리
-function deleteBook(index) {
-  if (confirm(`'${books[index].title}' 도서를 삭제하시겠습니까?`)) {
-    books.splice(index, 1); // 배열에서 삭제
-    localStorage.setItem('htag_books', JSON.stringify(books)); // LocalStorage 반영
-    renderBooks(); // 메인 화면 재렌더링
-    renderAdminBookList(); // 관리자 목록 재렌더링
-  }
-}
-
-// 도서 저장 시 폼 초기화 및 목록 업데이트
-function saveNewBook() {
-  const title = document.getElementById('bookTitle').value.trim();
-  const desc = document.getElementById('bookDesc').value.trim();
-  const coverImg = document.getElementById('coverImgName').value.trim();
-  const link = document.getElementById('aladinLink').value.trim();
-
-  if (!title) {
-    alert("책 제목을 입력해 주세요.");
-    return;
+  function closeAdminModal() {
+    document.getElementById('adminModal').style.display = 'none';
   }
 
-  const newBook = { title, desc, coverImg, link };
-  books.push(newBook);
-  localStorage.setItem('htag_books', JSON.stringify(books));
-  
-  // 입력 폼 비우기
-  document.getElementById('bookTitle').value = '';
-  document.getElementById('bookDesc').value = '';
-  document.getElementById('coverImgName').value = '';
-  document.getElementById('aladinLink').value = '';
+  // 📌 3. 메인 화면에 도서 목록 출력
+  function renderBooks() {
+    const container = document.getElementById('bookGrid');
+    const countEl = document.getElementById('bookCount');
+    if (countEl) countEl.textContent = `총 ${books.length}권`;
+    if (!container) return;
+    
+    container.innerHTML = '';
+    books.forEach(book => {
+      const card = document.createElement('div');
+      card.className = 'book-card';
+      const coverHtml = book.coverImg ? `<img src="${book.coverImg}" alt="${book.title} 표지">` : `<span>${book.title}<br>표지 준비중</span>`;
+      card.innerHTML = `
+        <a href="${book.link || '#'}" target="_blank" rel="noopener noreferrer" class="book-cover">
+          ${coverHtml}
+        </a>
+        <div class="book-info">
+          <h3 class="book-title">${book.title}</h3>
+          <p class="book-desc">${book.desc}</p>
+          <a href="${book.link || '#'}" target="_blank" rel="noopener noreferrer" class="btn-link">알라딘에서 보기</a>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
 
-  renderBooks();
-  renderAdminBookList();
-  alert("새 도서가 등록되었습니다!");
-}
+  // 📌 4. 관리자 도서 목록 출력 (삭제용)
+  function renderAdminBookList() {
+    const adminListContainer = document.getElementById('adminBookList');
+    if (!adminListContainer) return;
 
-    document.addEventListener('DOMContentLoaded', renderBooks);
+    if (books.length === 0) {
+      adminListContainer.innerHTML = '<p style="font-size:0.85rem; color:#888; text-align:center;">등록된 도서가 없습니다.</p>';
+      return;
+    }
+
+    adminListContainer.innerHTML = '';
+    books.forEach((book, index) => {
+      const item = document.createElement('div');
+      item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px dashed #eee; font-size: 0.85rem;';
+      item.innerHTML = `
+        <span style="font-weight:600;">${book.title}</span>
+        <button onclick="deleteBook(${index})" style="background:#ff4d4f; color:#fff; border:none; padding:2px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">삭제</button>
+      `;
+      adminListContainer.appendChild(item);
+    });
+  }
+
+  // 📌 5. 비밀번호 확인
+  function checkPassword() {
+    const inputPw = document.getElementById('adminPw').value;
+    if (inputPw === ADMIN_PW) {
+      document.getElementById('authStep').style.display = 'none';
+      document.getElementById('addBookStep').style.display = 'block';
+      renderAdminBookList();
+    } else {
+      alert("비밀번호가 올바르지 않습니다.");
+    }
+  }
+
+  // 📌 6. 도서 삭제
+  function deleteBook(index) {
+    if (confirm(`'${books[index].title}' 도서를 삭제하시겠습니까?`)) {
+      books.splice(index, 1);
+      localStorage.setItem('htag_books', JSON.stringify(books));
+      renderBooks();
+      renderAdminBookList();
+    }
+  }
+
+  // 📌 7. 새 도서 저장
+  function saveNewBook() {
+    const title = document.getElementById('bookTitle').value.trim();
+    const desc = document.getElementById('bookDesc').value.trim();
+    const coverImg = document.getElementById('coverImgName').value.trim();
+    const link = document.getElementById('aladinLink').value.trim();
+
+    if (!title) {
+      alert("책 제목을 입력해 주세요.");
+      return;
+    }
+
+    const newBook = { title, desc, coverImg, link };
+    books.push(newBook);
+    localStorage.setItem('htag_books', JSON.stringify(books));
+
+    document.getElementById('bookTitle').value = '';
+    document.getElementById('bookDesc').value = '';
+    document.getElementById('coverImgName').value = '';
+    document.getElementById('aladinLink').value = '';
+
+    renderBooks();
+    renderAdminBookList();
+    alert("새 도서가 등록되었습니다!");
+  }
+
+  // 페이지 로드 시 실행
+  document.addEventListener('DOMContentLoaded', renderBooks);
+</script>
   </script>
 </body>
 </html>
