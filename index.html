@@ -387,32 +387,37 @@ const books = [
   },
   */
 ];
-    function renderBooks() {
-      const grid = document.getElementById('bookGrid');
-      const countLabel = document.getElementById('bookCount');
+
+    // 도서 목록을 화면에 출력하는 함수
+function renderBooks() {
+  const container = document.getElementById('bookGrid');
+  container.innerHTML = '';
+
+  books.forEach(book => {
+    const card = document.createElement('div');
+    card.className = 'book-card';
+
+    // 표지 이미지 요소 생성 (이미지가 없으면 기본 대체 텍스트 표시)
+    const coverHtml = book.coverImg 
+      ? `<img src="${book.coverImg}" alt="${book.title} 표지">`
+      : `<span>${book.title}<br>표지 준비중</span>`;
+
+    card.innerHTML = `
+      <!-- 📌 이미지 부분을 <a> 태그로 감싸 클릭 시 알라딘 링크로 이동하도록 설정 -->
+      <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="book-cover">
+        ${coverHtml}
+      </a>
       
-      countLabel.textContent = `총 ${books.length}권`;
-      grid.innerHTML = '';
+      <div class="book-info">
+        <h3>${book.title}</h3>
+        <p>${book.desc}</p>
+        <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="btn">알라딘에서 보기</a>
+      </div>
+    `;
 
-      books.forEach((book) => {
-        const card = document.createElement('div');
-        card.className = 'book-card';
-
-        const coverHtml = book.coverImg 
-          ? `<img src="${book.coverImg}" alt="${book.title}">`
-          : `표지 준비중`;
-
-        card.innerHTML = `
-          <div class="book-cover">${coverHtml}</div>
-          <div class="book-info">
-            <div class="book-title">${book.title}</div>
-            <div class="book-desc">${book.desc}</div>
-            <a href="${book.link}" target="_blank" class="btn-link">알라딘에서 보기</a>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
+    container.appendChild(card);
+  });
+}
 
     document.addEventListener('DOMContentLoaded', renderBooks);
   </script>
