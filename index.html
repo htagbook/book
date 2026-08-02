@@ -11,312 +11,78 @@
       --card-bg: #ffffff;
       --text-color: #333333;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* 1. 상단 헤더 */
+    header { background-color: #ffffff !important; border-bottom: 1px solid #e2e8f0; padding: 0.8rem 1.5rem; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
+    .header-container { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: flex-start; }
+    .logo-area { display: flex; align-items: center; gap: 15px; }
+    .logo-img { height: 120px; width: auto; object-fit: contain; }
+
+    /* 2. 히어로 섹션 */
+    .hero { text-align: center; padding: 3rem 1.5rem 2.5rem; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; }
+    .hero-badge { display: inline-block; background: rgba(255, 255, 255, 0.1); color: #38bdf8; padding: 0.35rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 1.2rem; border: 1px solid rgba(255, 255, 255, 0.15); }
+    .hero h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.8rem; color: #ffffff; letter-spacing: -0.5px; }
+    .hero p { color: #94a3b8; font-size: 1.05rem; max-width: 580px; margin: 0 auto; font-weight: 400; }
+
+    /* 3. 도서 목록 섹션 */
+    .books-section { max-width: 1100px; margin: 3.5rem auto; padding: 0 1.5rem; }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.8rem; border-left: 4px solid var(--primary-color); padding-left: 12px; }
+    .section-title { font-size: 1.5rem; color: #111; }
+    .book-count { font-size: 0.9rem; color: #777; }
+    .book-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .book-card { background: var(--card-bg); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; display: flex; flex-direction: column; border: 1px solid #f0f0f0; }
+    .book-card:hover { transform: translateY(-6px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .book-cover { width: 100%; height: 280px; background-color: #f8fafc; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.9rem; padding: 10px; border-bottom: 1px solid #f1f5f9; text-decoration: none; }
+    .book-cover img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+    .book-info { padding: 1.2rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .book-title { font-size: 1.05rem; font-weight: bold; margin-bottom: 0.4rem; color: #222; }
+    .book-desc { font-size: 0.85rem; color: #666; margin-bottom: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .btn-link { margin-top: auto; display: inline-block; text-align: center; background-color: var(--primary-color); color: white; text-decoration: none; padding: 0.65rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; }
+
+    /* 4. 하단 섹션 및 푸터 */
+    .bottom-section { max-width: 1100px; margin: 5rem auto 3rem; padding: 0 1.5rem; }
+    .bottom-container { background: #ffffff; border-radius: 20px; padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; }
+    .bottom-text { flex: 1.3; }
+    .bottom-text h2 { font-size: 1.7rem; margin-bottom: 1rem; color: #111; }
+    .bottom-text p { color: #555; font-size: 1rem; line-height: 1.7; }
+    .bottom-video-wrapper { flex: 0.7; display: flex; justify-content: flex-end; align-items: center; }
+    .animated-logo-video { width: 100%; max-width: 240px; height: auto; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+    
+    footer { position: relative; text-align: center; padding: 2.5rem; color: #888; font-size: 0.85rem; background: #fafafa; border-top: 1px solid #eee; }
+    
+    /* 📌 오른쪽 하단 점 3개 버튼 및 관리자 모달 스타일 */
+    .admin-dots-btn {
+      position: absolute; right: 20px; bottom: 20px; background: none; border: none; font-size: 1.4rem; color: #ccc; cursor: pointer; padding: 5px; transition: color 0.2s;
     }
+    .admin-dots-btn:hover { color: #666; }
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
+    /* 모달 팝업 */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+    .modal-content { background: #fff; padding: 2rem; border-radius: 16px; width: 90%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+    .modal-content h3 { margin-bottom: 1rem; font-size: 1.2rem; color: #111; }
+    .form-group { margin-bottom: 1rem; text-align: left; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; color: #444; }
+    .form-group input, .form-group textarea { width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 6px; font-size: 0.9rem; }
+    .modal-btns { display: flex; justify-content: flex-end; gap: 10px; margin-top: 1.5rem; }
+    .btn-submit { background: var(--primary-color); color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .btn-cancel { background: #eee; color: #333; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; }
 
-/* 1. 상단 헤더 (흰색 고정) */
-header {
-  background-color: #ffffff !important;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 0.8rem 1.5rem;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-/* 📌 핵심: 하단 본문(.bottom-section)과 똑같이 max-width: 1100px + margin: 0 auto 적용 */
-.header-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* 왼쪽 정렬 */
-}
-
-  .logo-area {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* 로고와 글자 사이 간격 */
-}
-
-.logo-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #222222;
-  letter-spacing: -0.5px;
-}
-    /* 깃허브에 업로드된 logo.png 불러오기 */
-    .logo-img {
-      height: 120px; /* 시원하고 큼직한 로고 크기 */
-      width: auto;
-      object-fit: contain;
-    }
-
-    /* 2. 히어로 섹션 (신뢰감을 주는 프리미엄 디자인) */
-.hero {
-  text-align: center;
-  padding: 3rem 1.5rem 2.5rem; /* 세로 길이를 줄여 밀도감 있게 연출 */
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* 세련되고 전문적인 딥 네이비 배경 */
-  color: #ffffff;
-}
-
-.hero-badge {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.1); /* 깔끔한 글래스모피즘 뱃지 */
-  color: #38bdf8; /* 신뢰감을 주는 액센트 블루 */
-  padding: 0.35rem 1rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.hero h1 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  margin-bottom: 0.8rem;
-  color: #ffffff;
-  word-break: keep-all;
-  letter-spacing: -0.5px;
-}
-
-.hero p {
-  color: #94a3b8; /* 차분한 쿨그레이 톤 서브텍스트 */
-  font-size: 1.05rem;
-  max-width: 580px;
-  margin: 0 auto;
-  word-break: keep-all;
-  font-weight: 400;
-}
-
-    /* 3. 해시태그 트래블 시리즈 목록 섹션 */
-    .books-section {
-      max-width: 1100px;
-      margin: 3.5rem auto;
-      padding: 0 1.5rem;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 1.8rem;
-      border-left: 4px solid var(--primary-color);
-      padding-left: 12px;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      color: #111;
-    }
-
-    .book-count {
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-/* 3. 해시태그 트래블 시리즈 목록 grid (가로 4개 배치) */
-.book-grid {
-  display: grid;
-  /* PC 스크린 기준 가로 4개 균등 배치 */
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 1.5rem;
-}
-
-.book-card {
-  background: var(--card-bg);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #f0f0f0;
-}
-
-.book-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-/* 책 표지 컨테이너 및 이미지 (잘림 방지) */
-.book-cover {
-  width: 100%;
-  height: 280px; /* 표지 비율에 맞는 높이 설정 */
-  background-color: #f8fafc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #94a3b8;
-  font-size: 0.9rem;
-  padding: 10px; /* 표지 테두리 여백 */
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.book-cover img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain; /* 이미지 비율 유지하여 절대 잘리지 않도록 함 */
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); /* 책 입체감 효과 */
-}
-
-/* 태블릿 및 모바일 반응형 처리 */
-@media (max-width: 1024px) {
-  .book-grid {
-    grid-template-columns: repeat(2, 1fr); /* 태블릿에서는 가로 2개 */
-  }
-}
-
-@media (max-width: 576px) {
-  .book-grid {
-    grid-template-columns: repeat(1, 1fr); /* 모바일에서는 가로 1개 */
-  }
-}
-
-    .book-info {
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .book-title {
-      font-size: 1.05rem;
-      font-weight: bold;
-      margin-bottom: 0.4rem;
-      color: #222;
-      line-height: 1.4;
-    }
-
-    .book-desc {
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 1.2rem;
-  white-space: nowrap;     /* Text가 2줄로 바뀌지 않고 한 줄로 유지되도록 고정 */
-  overflow: hidden;        /* 혹시 넘치는 긴 텍스트가 생겨도 레이아웃을 깨뜨리지 않음 */
-  text-overflow: ellipsis; /* 너무 길면 ... 으로 깔끔하게 표시 */
-}
-
-    .btn-link {
-      margin-top: auto;
-      display: inline-block;
-      text-align: center;
-      background-color: var(--primary-color);
-      color: white;
-      text-decoration: none;
-      padding: 0.65rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: background-color 0.2s;
-    }
-
-    .btn-link:hover {
-      background-color: #c8235a;
-    }
-
-    /* 4. 하단 영역 & 오른쪽에 logo-animated.mp4 배치 */
-    .bottom-section {
-      max-width: 1100px;
-      margin: 5rem auto 3rem;
-      padding: 0 1.5rem;
-    }
-
-    .bottom-container {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-      border: 1px solid #f0f0f0;
-    }
-
-    .bottom-text {
-      flex: 1.3;
-    }
-
-    .bottom-text h2 {
-      font-size: 1.7rem;
-      margin-bottom: 1rem;
-      color: #111;
-      word-break: keep-all;
-    }
-
-    .bottom-text p {
-      color: #555;
-      font-size: 1rem;
-      line-height: 1.7;
-      word-break: keep-all;
-    }
-
-    .bottom-video-wrapper {
-      flex: 0.7;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
-
-    /* 깃허브에 업로드된 logo-animated.mp4 불러오기 */
-    .animated-logo-video {
-      width: 100%;
-      max-width: 240px;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2.5rem;
-      color: #888;
-      font-size: 0.85rem;
-      background: #fafafa;
-      border-top: 1px solid #eee;
-    }
-
-    @media (max-width: 768px) {
-      .logo-img { height: 50px; }
-      .hero h1 { font-size: 1.8rem; }
-      .bottom-container {
-        flex-direction: column;
-        text-align: center;
-        padding: 2rem;
-      }
-      .bottom-video-wrapper {
-        justify-content: center;
-      }
-    }
+    @media (max-width: 1024px) { .book-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 576px) { .book-grid { grid-template-columns: repeat(1, 1fr); } }
   </style>
 </head>
 <body>
 
-<!-- 헤더 (logo.png) -->
-<header>
-  <div class="header-container">
-    <div class="logo-area">
-      <img src="logo.png" alt="해시태그 트래블 로고" class="logo-img">
+  <!-- 상단 헤더 -->
+  <header>
+    <div class="header-container">
+      <div class="logo-area">
+        <img src="logo.png" alt="해시태그 트래블 로고" class="logo-img">
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
   <!-- 히어로 섹션 -->
   <section class="hero">
@@ -334,18 +100,13 @@ header {
     <div class="book-grid" id="bookGrid"></div>
   </section>
 
-  <!-- 하단 섹션 (logo-animated.mp4 배치) -->
+  <!-- 하단 섹션 -->
   <section class="bottom-section">
     <div class="bottom-container">
       <div class="bottom-text">
         <h2>여행의 시작부터 끝까지, 해시태그와 함께</h2>
-        <p>
-          주요 명소부터 숨겨진 로컬 스팟, 최신 여행 팁까지! <br>
-          해시태그 트래블 시리즈는 복잡한 정보 대신 여행자에게 꼭 필요한 핵심 내용만 알차게 담아냅니다.
-        </p>
+        <p>주요 명소부터 숨겨진 로컬 스팟, 최신 여행 팁까지!<br>해시태그 트래블 시리즈는 복잡한 정보 대신 여행자에게 꼭 필요한 핵심 내용만 알차게 담아냅니다.</p>
       </div>
-
-      <!-- 오른쪽 움직이는 MP4 로고 -->
       <div class="bottom-video-wrapper">
         <video class="animated-logo-video" autoplay loop muted playsinline>
           <source src="logo-animated.mp4" type="video/mp4">
@@ -354,84 +115,140 @@ header {
     </div>
   </section>
 
+  <!-- 푸터 및 관리자 버튼 -->
   <footer>
     <p>HtagBook@gmail.com</p>
     <p>© 해시태그 트래블 시리즈. All rights reserved.</p>
+    <!-- 📌 오른쪽 하단 점 3개 버튼 -->
+    <button class="admin-dots-btn" onclick="openAdminAuth()" title="관리자 모드">⋮</button>
   </footer>
 
-  <!-- 가이드북 동적 관리 스크립트 -->
-  <script>
-
-// 💡 알라딘 시리즈 도서를 계속 추가하실 수 있는 목록입니다.
-const books = [
-  {
-    title: "크로아티아",
-    desc: "여행지 핵심정보&추천코스",
-    coverImg: "croatia.jpg", // 이미지 파일명
-    link: "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=394085172"
-  },
-  {
-    title: "해시태그 가이드북 02",
-    desc: "자유 여행 실전 가이드",
-    coverImg: "", // 표지 이미지가 없으면 기본 안내문구가 뜹니다.
-    link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804"
-  },
-  {
-    title: "해시태그 가이드북 03",
-    desc: "숨은 로컬스팟&맛집",
-    coverImg: "",
-    link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804"
-  },
-  {
-    title: "해시태그 가이드북 04",
-    desc: "한 권으로 떠나는 여행",
-    coverImg: "",
-    link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804"
-  },
-  /* 
-  📌 새 도서를 추가할 때 아래 양식을 복사해서 계속 붙여넣으시면 됩니다:
-  {
-    title: "스페인",
-    desc: "열정과 로맨스의 나라 스페인",
-    coverImg: "spain.jpg",
-    link: "알라딘 상품 링크 URL"
-  },
-  */
-];
-
-    // 도서 목록을 화면에 출력하는 함수
-function renderBooks() {
-  const container = document.getElementById('bookGrid');
-  container.innerHTML = '';
-
-  books.forEach(book => {
-    const card = document.createElement('div');
-    card.className = 'book-card';
-
-    // 표지 이미지 요소 생성 (이미지가 없으면 기본 대체 텍스트 표시)
-    const coverHtml = book.coverImg 
-      ? `<img src="${book.coverImg}" alt="${book.title} 표지">`
-      : `<span>${book.title}<br>표지 준비중</span>`;
-
-    card.innerHTML = `
-      <!-- 📌 이미지 부분을 <a> 태그로 감싸 클릭 시 알라딘 링크로 이동하도록 설정 -->
-      <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="book-cover">
-        ${coverHtml}
-      </a>
-      
-      <div class="book-info">
-        <h3>${book.title}</h3>
-        <p>${book.desc}</p>
-        <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="btn">알라딘에서 보기</a>
+  <!-- 📌 관리자 인증 / 도서 추가 모달 팝업 -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-content">
+      <!-- 1단계: 비밀번호 입력 -->
+      <div id="authStep">
+        <h3>🔒 관리자 인증</h3>
+        <div class="form-group">
+          <label for="adminPw">비밀번호</label>
+          <input type="password" id="adminPw" placeholder="비밀번호를 입력하세요">
+        </div>
+        <div class="modal-btns">
+          <button class="btn-cancel" onclick="closeAdminModal()">취소</button>
+          <button class="btn-submit" onclick="checkPassword()">확인</button>
+        </div>
       </div>
-    `;
 
-    container.appendChild(card);
-  });
-}
+      <!-- 2단계: 도서 등록 폼 -->
+      <div id="addBookStep" style="display: none;">
+        <h3>📚 새 도서 추가하기</h3>
+        <div class="form-group">
+          <label for="bookTitle">책 제목</label>
+          <input type="text" id="bookTitle" placeholder="예: 스페인">
+        </div>
+        <div class="form-group">
+          <label for="bookDesc">설명</label>
+          <input type="text" id="bookDesc" placeholder="예: 열정과 로맨스의 나라 스페인">
+        </div>
+        <div class="form-group">
+          <label for="coverImgName">이미지 파일명</label>
+          <input type="text" id="coverImgName" placeholder="예: spain.jpg (GitHub에 업로드된 파일명)">
+        </div>
+        <div class="form-group">
+          <label for="aladinLink">알라딘 구매 링크</label>
+          <input type="text" id="aladinLink" placeholder="https://www.aladin.co.kr/...">
+        </div>
+        <div class="modal-btns">
+          <button class="btn-cancel" onclick="closeAdminModal()">취소</button>
+          <button class="btn-submit" onclick="saveNewBook()">저장하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 💡 기본 도서 데이터
+    const defaultBooks = [
+      { title: "크로아티아", desc: "여행지 핵심정보&추천코스", coverImg: "croatia.jpg", link: "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=394085172" },
+      { title: "해시태그 가이드북 02", desc: "자유 여행 실전 가이드", coverImg: "", link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804" },
+      { title: "해시태그 가이드북 03", desc: "숨은 로컬스팟&맛집", coverImg: "", link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804" },
+      { title: "해시태그 가이드북 04", desc: "한 권으로 떠나는 여행", coverImg: "", link: "https://www.aladin.co.kr/shop/common/wseriesitem.aspx?SRID=124804" }
+    ];
+
+    // 저장된 데이터 불러오기 (없으면 기본값)
+    let books = JSON.parse(localStorage.getItem('htag_books')) || defaultBooks;
+
+    // 화면에 목록 출력
+    function renderBooks() {
+      const container = document.getElementById('bookGrid');
+      document.getElementById('bookCount').textContent = `총 ${books.length}권`;
+      container.innerHTML = '';
+      
+      books.forEach(book => {
+        const card = document.createElement('div');
+        card.className = 'book-card';
+        const coverHtml = book.coverImg ? `<img src="${book.coverImg}" alt="${book.title} 표지">` : `<span>${book.title}<br>표지 준비중</span>`;
+        card.innerHTML = `
+          <a href="${book.link || '#'}" target="_blank" rel="noopener noreferrer" class="book-cover">
+            ${coverHtml}
+          </a>
+          <div class="book-info">
+            <h3 class="book-title">${book.title}</h3>
+            <p class="book-desc">${book.desc}</p>
+            <a href="${book.link || '#'}" target="_blank" rel="noopener noreferrer" class="btn-link">알라딘에서 보기</a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- 관리자 모달 제어 ---
+    const ADMIN_PW = "1234"; // 📌 비밀번호 설정 (원하시는 비밀번호로 변경하세요)
+
+    function openAdminAuth() {
+      document.getElementById('adminModal').style.display = 'flex';
+      document.getElementById('authStep').style.display = 'block';
+      document.getElementById('addBookStep').style.display = 'none';
+      document.getElementById('adminPw').value = '';
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').style.display = 'none';
+    }
+
+    function checkPassword() {
+      const inputPw = document.getElementById('adminPw').value;
+      if (inputPw === ADMIN_PW) {
+        document.getElementById('authStep').style.display = 'none';
+        document.getElementById('addBookStep').style.display = 'block';
+      } else {
+        alert("비밀번호가 올바르지 않습니다.");
+      }
+    }
+
+    function saveNewBook() {
+      const title = document.getElementById('bookTitle').value.trim();
+      const desc = document.getElementById('bookDesc').value.trim();
+      const coverImg = document.getElementById('coverImgName').value.trim();
+      const link = document.getElementById('aladinLink').value.trim();
+
+      if (!title) {
+        alert("책 제목을 입력해 주세요.");
+        return;
+      }
+
+      const newBook = { title, desc, coverImg, link };
+      books.push(newBook);
+      
+      // LocalStorage 저장
+      localStorage.setItem('htag_books', JSON.stringify(books));
+      
+      renderBooks();
+      closeAdminModal();
+      alert("새 도서가 등록되었습니다!");
+    }
 
     document.addEventListener('DOMContentLoaded', renderBooks);
   </script>
-
 </body>
 </html>
