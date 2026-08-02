@@ -199,10 +199,13 @@ header {
     }
 
     .book-desc {
-      font-size: 0.85rem;
-      color: #666;
-      margin-bottom: 1.2rem;
-    }
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 1.2rem;
+  white-space: nowrap;     /* Text가 2줄로 바뀌지 않고 한 줄로 유지되도록 고정 */
+  overflow: hidden;        /* 혹시 넘치는 긴 텍스트가 생겨도 레이아웃을 깨뜨리지 않음 */
+  text-overflow: ellipsis; /* 너무 길면 ... 으로 깔끔하게 표시 */
+}
 
     .btn-link {
       margin-top: auto;
