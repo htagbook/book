@@ -123,45 +123,65 @@
       color: #777;
     }
 
-    .book-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 1.8rem;
-    }
+/* 3. 해시태그 트래블 시리즈 목록 grid (가로 4개 배치) */
+.book-grid {
+  display: grid;
+  /* PC 스크린 기준 가로 4개 균등 배치 */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1.5rem;
+}
 
-    .book-card {
-      background: var(--card-bg);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #f0f0f0;
-    }
+.book-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #f0f0f0;
+}
 
-    .book-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
+.book-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
 
-    .book-cover {
-      width: 100%;
-      height: 250px;
-      background-color: #f3f4f6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-size: 0.9rem;
-      position: relative;
-    }
+/* 책 표지 컨테이너 및 이미지 (잘림 방지) */
+.book-cover {
+  width: 100%;
+  height: 280px; /* 표지 비율에 맞는 높이 설정 */
+  background-color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  padding: 10px; /* 표지 테두리 여백 */
+  border-bottom: 1px solid #f1f5f9;
+}
 
-    .book-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.book-cover img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* 이미지 비율 유지하여 절대 잘리지 않도록 함 */
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); /* 책 입체감 효과 */
+}
+
+/* 태블릿 및 모바일 반응형 처리 */
+@media (max-width: 1024px) {
+  .book-grid {
+    grid-template-columns: repeat(2, 1fr); /* 태블릿에서는 가로 2개 */
+  }
+}
+
+@media (max-width: 576px) {
+  .book-grid {
+    grid-template-columns: repeat(1, 1fr); /* 모바일에서는 가로 1개 */
+  }
+}
 
     .book-info {
       padding: 1.2rem;
