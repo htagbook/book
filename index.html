@@ -196,21 +196,25 @@ header {
       flex-grow: 1;
     }
 
-    .book-title {
-      font-size: 1.05rem;
-      font-weight: bold;
-      margin-bottom: 0.4rem;
-      color: #222;
-      line-height: 1.4;
-    }
+   /* 책 제목: 한 줄 고정 및 ... 처리 */
+.book-title {
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  color: #222;
+  white-space: nowrap;       /* 텍스트 줄바꿈 방지 */
+  overflow: hidden;          /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis;   /* 넘친 부분 ... 처리 */
+}
 
-    .book-desc {
+/* 책 설명: 한 줄 고정 및 ... 처리 */
+.book-desc {
   font-size: 0.85rem;
   color: #666;
   margin-bottom: 1.2rem;
-  white-space: nowrap;     /* Text가 2줄로 바뀌지 않고 한 줄로 유지되도록 고정 */
-  overflow: hidden;        /* 혹시 넘치는 긴 텍스트가 생겨도 레이아웃을 깨뜨리지 않음 */
-  text-overflow: ellipsis; /* 너무 길면 ... 으로 깔끔하게 표시 */
+  white-space: nowrap;       /* 텍스트 줄바꿈 방지 */
+  overflow: hidden;          /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis;   /* 넘친 부분 ... 처리 */
 }
 
     .btn-link {
@@ -415,18 +419,17 @@ function renderBooks() {
       ? `<img src="${book.coverImg}" alt="${book.title} 표지">`
       : `<span>${book.title}<br>표지 준비중</span>`;
 
-    card.innerHTML = `
-      <!-- 📌 이미지 부분을 <a> 태그로 감싸 클릭 시 알라딘 링크로 이동하도록 설정 -->
-      <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="book-cover">
-        ${coverHtml}
-      </a>
-      
-      <div class="book-info">
-        <h3>${book.title}</h3>
-        <p>${book.desc}</p>
-        <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="btn">알라딘에서 보기</a>
-      </div>
-    `;
+  /* renderBooks() 함수 내부 수정 */
+card.innerHTML = `
+  <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="book-cover">
+    ${coverHtml}
+  </a>
+  <div class="book-info">
+    <h3 class="book-title">${book.title}</h3>
+    <p class="book-desc">${book.desc}</p>
+    <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="btn-link">알라딘에서 보기</a>
+  </div>
+`;
 
     container.appendChild(card);
   });
