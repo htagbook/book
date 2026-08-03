@@ -207,14 +207,25 @@ header {
   text-overflow: ellipsis;   /* 넘친 부분 ... 처리 */
 }
 
-/* 책 설명: 한 줄 고정 및 ... 처리 */
+/* 책 설명: 기본 한 줄 고정 및 클릭 가능 표시 */
 .book-desc {
   font-size: 0.85rem;
   color: #666;
   margin-bottom: 1.2rem;
-  white-space: nowrap;       /* 텍스트 줄바꿈 방지 */
-  overflow: hidden;          /* 넘치는 텍스트 숨김 */
-  text-overflow: ellipsis;   /* 넘친 부분 ... 처리 */
+  white-space: nowrap;       /* 기본: 한 줄 고정 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;           /* 마우스 호버 시 손가락 모양 커서 */
+  transition: all 0.2s ease;
+}
+
+/* 클릭 시 2줄까지 전체 표시하는 클래스 */
+.book-desc.expanded {
+  white-space: normal;       /* 줄바꿈 허용 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;     /* 최대 2줄까지 표시 */
+  -webkit-box-orient: vertical;
+  word-break: keep-all;      /* 단어 단위 자연스러운 줄바꿈 */
 }
 
     .btn-link {
@@ -476,29 +487,31 @@ function renderBooks() {
     const card = document.createElement('div');
     card.className = 'book-card';
 
-    // 표지 이미지 요소 생성 (이미지가 없으면 기본 대체 텍스트 표시)
     const coverHtml = book.coverImg 
-      ? `<img src="${book.coverImg}" alt="${book.title} 표지">`
+      ? `<img src="${book.coverImg}" alt="${book.title} 표지">` 
       : `<span>${book.title}<br>표지 준비중</span>`;
 
-  /* renderBooks() 함수 내부 수정 */
-card.innerHTML = `
-  <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="book-cover">
-    ${coverHtml}
-  </a>
-  <div class="book-info">
-    <h3 class="book-title">${book.title}</h3>
-    <p class="book-desc">${book.desc}</p>
-    <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="btn-link">알라딘에서 보기</a>
-  </div>
-`;
+    card.innerHTML = `
+      <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="book-cover">
+        ${coverHtml}
+      </a>
+      <div class="book-info">
+        <h3 class="book-title">${book.title}</h3>
+        <p class="book-desc" title="클릭하여 전체보기">${book.desc}</p>
+        <a href="${book.link}" target="_blank" rel="noopener noreferrer" class="btn-link">알라딘에서 보기</a>
+      </div>
+    `;
+
+    // 📌 추가: 책 설명 클릭 시 두 줄 전체보기 토글 기능
+    const descEl = card.querySelector('.book-desc');
+    descEl.addEventListener('click', () => {
+      descEl.classList.toggle('expanded');
+    });
 
     container.appendChild(card);
   });
 }
 
-    document.addEventListener('DOMContentLoaded', renderBooks);
-  </script>
 
 </body>
 </html>
