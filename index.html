@@ -508,10 +508,12 @@ function renderBooks() {
       descEl.classList.toggle('expanded');
     });
 
-    container.appendChild(card);
+   container.appendChild(card);
   });
 }
 
-
+// 📌 페이지 로드 완료 시 도서 목록 출력 실행
+document.addEventListener('DOMContentLoaded', renderBooks);
+</script>
 </body>
-</html>
+</html> 
