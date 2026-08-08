@@ -37,14 +37,30 @@ header {
 }
 
 /* 📌 핵심: 하단 본문(.bottom-section)과 똑같이 max-width: 1100px + margin: 0 auto 적용 */
-.header-container {
-  max-width: 1100px;
+
+    .header-container {
+  max-width: 900px; /* 본문 너비와 동일하게 유지 */
   margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* 왼쪽 정렬 */
+  justify-content: space-between; /* 📌 로고는 왼쪽, 소개 링크는 오른쪽 끝으로 배치 */
 }
 
+/* 📌 오른쪽 끝 "해시태그 출판사 소개" 링크 스타일 */
+.header-intro-link {
+  font-size: 0.75rem; /* 매우 작게 처리 */
+  color: #666666;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.header-intro-link:hover {
+  color: #1d3557;
+  text-decoration: underline;
+}
+    
   .logo-area {
   display: flex;
   align-items: center;
@@ -361,7 +377,13 @@ header {
       </a>
     </div>
   </div>
+
+<!-- 📌 오른쪽 끝 정렬 문구 및 링크 -->
+    <a href="soge.html" class="header-intro-link">해시태그 출판사 소개</a>
+  </div>
 </header>
+  
+
 
   <!-- 히어로 섹션 -->
   <section class="hero">
