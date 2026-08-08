@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HASHTAG PUBLISHING - 브랜드 소개</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1d3557;
+            --accent: #e63946;
+            --text: #2b2d42;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --border: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            background-color: #fff;
+            word-break: keep-all;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Header / Brand Title */
+        .brand-header {
+            text-align: center;
+            padding-bottom: 50px;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 60px;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .brand-slogan {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Core Sections */
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #495057;
+            margin-bottom: 24px;
+        }
+
+        .intro-text .highlight {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+            position: relative;
+            padding-left: 14px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 80%;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .value-card {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 20px 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .value-key {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .value-desc {
+            font-size: 0.88rem;
+            color: var(--text-light);
+        }
+
+        /* Closing Banner */
+        .closing-banner {
+            background-color: var(--primary);
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .closing-banner h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .closing-banner p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            opacity: 0.85;
+            margin-bottom: 24px;
+        }
+
+        .brand-footer-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: #f1faee;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding-top: 16px;
+        }
+
+        .brand-footer-text strong {
+            font-style: normal;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-right: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .brand-name {
+                font-size: 2.1rem;
+            }
+            .brand-slogan {
+                font-size: 1.15rem;
+            }
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="brand-header">
+            <h1 class="brand-name">HASHTAG PUBLISHING</h1>
+            <p class="brand-slogan">여행을 기록하고, 여행의 새로운 길을 제안합니다.</p>
+        </header>
+
+        <!-- Intro Section -->
+        <section class="section">
+            <p class="intro-text">
+                <span class="highlight">해시태그는 여행자의 시선에서 여행을 바라보는 여행 전문 출판사입니다.</span>
+            </p>
+            <p class="intro-text">
+                우리는 단순히 여행지를 소개하는 책을 만드는 데 그치지 않습니다. 여행을 계획하는 순간부터 현지에서 새로운 경험을 만나는 순간까지, 여행자에게 실제로 필요한 정보와 이야기를 한 권의 책에 담아냅니다.
+            </p>
+            <p class="intro-text">
+                유럽, 동남아시아, 베트남을 비롯한 다양한 여행지를 중심으로 <span class="highlight">지역별 가이드북부터 한 달 살기, 자동차 여행, 순례길 등 여행의 목적과 방식에 맞는 다양한 콘텐츠</span>를 선보이고 있습니다.
+            </p>
+            <p class="intro-text">
+                특히 변화하는 여행 환경과 새로운 여행지를 꾸준히 살피고, 기존 여행서에서 쉽게 다루지 않았던 지역과 테마를 발굴해 <span class="highlight">새로운 여행의 가능성을 독자에게 제안하는 것</span>을 중요하게 생각합니다.
+            </p>
+        </section>
+
+        <!-- Concept Section -->
+        <section class="section">
+            <h2 class="section-title">우리의 책은 '여행을 위한 책'입니다.</h2>
+            <p class="intro-text">
+                <span class="highlight">정보를 찾는 책에서 여행을 떠나게 만드는 책으로.</span>
+            </p>
+            <p class="intro-text">
+                해시태그의 여행서는 여행지의 명소만 나열하지 않습니다. 어디로 갈 것인지, 무엇을 경험할 것인지, 어떻게 이동할 것인지, 얼마나 머물 것인지까지 여행자가 실제 여행을 준비하는 과정에서 필요한 정보를 중심으로 콘텐츠를 구성합니다.
+            </p>
+            <p class="intro-text">
+                베트남 북부·중부·남부를 비롯해 푸꾸옥, 나트랑, 다낭, 달랏 등 개별 여행지부터 그리스, 이탈리아, 오스트리아, 아이슬란드, 알프스 등 유럽 여행지까지 폭넓은 여행 콘텐츠를 지속적으로 출간하고 있습니다.
+            </p>
+        </section>
+
+        <!-- Series Section -->
+        <section class="section">
+            <h2 class="section-title">HASHTAG TRAVEL</h2>
+            <p class="intro-text">
+                <span class="highlight">여행의 시작, 해시태그 트래블</span>
+            </p>
+            <p class="intro-text">
+                <strong>#해시태그 트래블</strong>은 해시태그 출판사를 대표하는 여행 가이드북 시리즈입니다. 크로아티아·몬테네그로·알바니아, 모로코, 몰타, 그리스, 베트남, 조지아, 아이슬란드, 이탈리아 알프스 등 다양한 지역의 최신 여행서를 선보이고 있습니다.
+            </p>
+            <p class="intro-text">
+                또한 일반적인 관광 여행뿐 아니라 <span class="highlight">한 달 살기, 자동차 여행, 순례길, 골프 여행</span> 등 여행자의 다양한 라이프스타일과 목적에 맞춘 책을 통해 여행의 선택지를 넓혀가고 있습니다.
+            </p>
+        </section>
+
+        <!-- Core Values Section -->
+        <section class="section">
+            <h2 class="section-title">우리가 추구하는 것</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-key">LOCAL</div>
+                    <div class="value-desc">현지의 생생한 정보와 이야기를 담습니다.</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-key">PRACTICAL</div>
+                    <div class="value-desc">여행자가 실제로 사용할 수 있는 정보를 제공합니다.</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-key">CURIOUS</div>
+                    <div class="value-desc">아직 많이 알려지지 않은 새로운 여행지를 발견합니다.</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-key">UPDATE</div>
+                    <div class="value-desc">변화하는 여행 환경에 맞춰 새로운 정보를 담아냅니다.</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-key">INSPIRING</div>
+                    <div class="value-desc">정보를 넘어, 독자가 실제로 여행을 떠나고 싶게 만드는 책을 만듭니다.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing Banner Section -->
+        <div class="closing-banner">
+            <h3>당신의 다음 여행에</h3>
+            <p>해시태그가 함께하겠습니다.</p>
+            <p style="font-size: 0.95rem; margin-bottom: 30px;">
+                여행은 목적지를 선택하는 순간부터 시작됩니다.<br>
+                해시태그 출판사는 더 많은 곳을 발견하고, 더 깊이 경험하고, 더 자유롭게 여행할 수 있도록 여행자에게 필요한 책을 만들어가겠습니다.
+            </p>
+            <div class="brand-footer-text">
+                <strong>HASHTAG PUBLISHING</strong> Books that make you want to travel.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
