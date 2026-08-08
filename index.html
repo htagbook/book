@@ -177,41 +177,45 @@ header {
 }
 
 /* 태블릿 및 모바일 반응형 처리 */
-@media (max-width: 1024px) {
-  .book-grid {
-    grid-template-columns: repeat(2, 1fr); /* 태블릿에서는 가로 2개 */
-  }
-}
 
-    
 @media (max-width: 576px) {
   /* 1. 모바일 2열 배치 및 간격 축소 */
   .book-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.6rem;
   }
-  
-  /* 2. 카드 요소 및 이미지 높이 축소 */
-  .book-cover {
-    height: 150px; /* 표지 높이를 줄여 카드 전체 세로 길이 축소 */
-  }
-  .book-info {
-    padding: 0.6rem 0.4rem; /* 내부 여백 축소 */
-  }
-  .book-title {
-    font-size: 0.85rem;
-  }
-  .book-desc {
-    font-size: 0.72rem;
-    margin-bottom: 0.6rem;
+
+  /* 2. 카드 전체 세로 비율 및 여백 압축 */
+  .book-card {
+    border-radius: 10px; /* 라운딩 살짝 축소하여 컴팩트하게 */
   }
 
-  /* 3. 버튼 줄바꿈 방지 및 높이 단축 */
+  .book-cover {
+    height: 120px; /* 기존 150px -> 120px로 줄여 표지 비율 컴팩트화 */
+    padding: 6px;
+  }
+
+  .book-info {
+    padding: 0.5rem 0.4rem; /* 위아래 패딩 축소 */
+  }
+
+  .book-title {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .book-desc {
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem; /* 아래 간격 축소 */
+  }
+
+  /* 3. 버튼 높이 및 패딩 단축 */
   .btn-link {
-    padding: 0.35rem 0.2rem;
-    font-size: 0.75rem;
-    white-space: nowrap; /* 📌 강제로 한 줄로 유지 (줄바꿈 방지) */
-    letter-spacing: -0.5px; /* 자간을 줄여 좁은 화면에서도 쏙 들어가게 처리 */
+    padding: 0.3rem 0.2rem;
+    font-size: 0.72rem;
+    white-space: nowrap;
+    letter-spacing: -0.5px;
+    border-radius: 6px;
   }
 }
     
