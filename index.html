@@ -184,31 +184,36 @@ header {
 }
 
 @media (max-width: 576px) {
-  /* 1. 모바일에서 가로 2열(2개씩) 배치 및 간격 조정 */
+  /* 1. 모바일 2열 배치 및 간격 축소 */
   .book-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: 0.6rem;
   }
   
-  /* 2. 좁은 모바일 화면에 맞춘 카드 및 요소 크기 축소 */
+  /* 2. 카드 요소 및 이미지 높이 축소 */
   .book-cover {
-    height: 180px; /* 표지 이미지 높이 축소 */
+    height: 150px; /* 표지 높이를 줄여 카드 전체 세로 길이 축소 */
   }
   .book-info {
-    padding: 0.8rem 0.5rem; /* 카드 내부 여백 축소 */
+    padding: 0.6rem 0.4rem; /* 내부 여백 축소 */
   }
   .book-title {
-    font-size: 0.9rem; /* 제목 글자 크기 조정 */
+    font-size: 0.85rem;
   }
   .book-desc {
-    font-size: 0.75rem; /* 설명 글자 크기 조정 */
-    margin-bottom: 0.8rem;
+    font-size: 0.72rem;
+    margin-bottom: 0.6rem;
   }
+
+  /* 3. 버튼 줄바꿈 방지 및 높이 단축 */
   .btn-link {
-    padding: 0.4rem; /* 버튼 여백 및 글자 크기 조정 */
-    font-size: 0.8rem;
+    padding: 0.35rem 0.2rem;
+    font-size: 0.75rem;
+    white-space: nowrap; /* 📌 강제로 한 줄로 유지 (줄바꿈 방지) */
+    letter-spacing: -0.5px; /* 자간을 줄여 좁은 화면에서도 쏙 들어가게 처리 */
   }
 }
+    
 
     .book-info {
       padding: 1.2rem;
