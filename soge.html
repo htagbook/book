@@ -39,15 +39,16 @@
         }
 
         /* 1. 상단 헤더 */
+       
         header {
-            background-color: #ffffff !important;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 0.8rem 1.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.8rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999; /* 📌 본문 요소들보다 훨씬 높은 숫자로 설정하여 항상 최상단에 위치시킴 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
 
         .header-container {
             max-width: 1100px;
